@@ -1,0 +1,258 @@
+<html lang="de">
+<head>
+    <title>eTicket</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="qrcode.js"></script>
+    <meta name="theme-color" content="#238ED5"/>
+    <link rel="manifest" href="manifest.json">
+
+    <script>
+        const code = "781K925XA1B4315";
+    </script>
+
+    <style>
+        body {
+            background-color: #238ED5;
+            padding: 12px;
+            font-family: Lato, sans-serif;
+        }
+
+        h1 {
+            font-weight: normal;
+            font-size: 26px;
+        }
+
+        #header {
+            width: 100%;
+            top: 0;
+            display: block;
+            position: fixed;
+            color: white;
+            height: 80px;
+            z-index: 2;
+            background-color: #238ED5;
+            horiz-align: center;
+        }
+
+        .arrow {
+            width: 25px;
+            top: 3px;
+            position: relative;
+            margin-right: 40px;
+        }
+
+        #ticket {
+            margin-top: 80px;
+            background-color: white;
+            border-radius: 20px;
+        }
+
+        .ticket-content {
+            padding: 20px;
+        }
+
+        .centered {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        p {
+            color: #656565;
+            font-size: 15px;
+        }
+
+        .split {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: stretch;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .half {
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .half h2 {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .line h2 {
+            margin-bottom: 0;
+        }
+
+        .line p {
+            margin-top: 4px;
+        }
+
+        .hr-line {
+            border-top: 2px dashed #656565;
+            width: 100%;
+        }
+
+        .circle {
+            display: inline-block;
+            height: 20px;
+            width: 10px;
+            background-color: #238ED5;
+            position: relative;
+            top: -10px;
+        }
+
+        .circle-left {
+            border-bottom-right-radius: 40px;
+            border-top-right-radius: 40px;
+        }
+
+        .circle-right {
+            border-bottom-left-radius: 40px;
+            border-top-left-radius: 40px;
+        }
+
+        .loader {
+            width: 100%;
+            margin: 0 auto;
+            border-radius: 10px;
+            border: 4px solid transparent;
+            position: relative;
+            padding: 4px;
+        }
+
+        .loader:before {
+            content: '';
+            position: absolute;
+        }
+
+        .loader .loaderBar {
+            position: absolute;
+            top: 0;
+            #right: 100%;
+            right: 100%;
+            bottom: 0;
+            left: 0;
+            background: #238ED5;
+            width: 100%;
+            animation: borealisBar 1.4s ease-out infinite;
+        }
+
+        @keyframes borealisBar {
+            0% {
+                left: 0;
+                right: 100%;
+                width: 0;
+            }
+            10% {
+                left: 0;
+                right: 40%;
+                width: 50%;
+            }
+            90% {
+                right: 0;
+                left: 40%;
+                width: 60%;
+            }
+            100% {
+                left: 100%;
+                right: 0;
+                width: 0;
+            }
+        }
+
+        #qrcode-gen img {
+            width: 50%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #code {
+            padding-top: 10px;
+            margin-bottom: -5px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="header">
+    <h1><img src="arrow.svg" alt="🡠" class="arrow"/> eTicket scannen</h1>
+</div>
+<div id="ticket">
+    <div class="ticket-content">
+        <div class="loader">
+            <div class="loaderBar"></div>
+        </div>
+        <p>eTicket nur mit Sicherheitsstreifen gültig!</p>
+    </div>
+    <div class="hr split">
+        <span class="circle circle-left"></span>
+        <div class="hr-line"></div>
+        <span class="circle circle-right"></span>
+    </div>
+
+    <div id="qrcode-gen" class="centered"></div>
+    <script type="text/javascript">
+        new QRCode(document.getElementById("qrcode-gen"), {
+            text: code.toLowerCase(),
+            width: 180,
+            height: 180,
+            correctLevel: QRCode.CorrectLevel.M // Options: M,Q,L,H
+        });
+
+    </script>
+
+    <div class="centered" id="code">
+        <p id="qr-code">generated</p>
+    </div>
+    <script type="text/javascript">
+        document.getElementById("qr-code").innerHTML = code.toUpperCase();
+    </script>
+    <div class="hr split">
+        <span class="circle circle-left"></span>
+        <div class="hr-line"></div>
+        <span class="circle circle-right"></span>
+    </div>
+
+    <div class="ticket-content">
+        <div class="split">
+            <div class="half line">
+                <h2>Jahreskarte Plus inkl. Gondoletta</h2>
+                <p>Ticketart</p>
+            </div>
+            <div class="half line">
+                <h2>Erwachsene</h2>
+                <p>Tarif</p>
+            </div>
+        </div>
+        <div class="line">
+            <h2>01.01.2021 09:30 Uhr</h2>
+            <p>Beginn Gültigkeit</p>
+        </div>
+        <div class="line">
+            <h2>01.01.2022 09:30 Uhr</h2>
+            <p>Ende Gültigkeit</p>
+        </div>
+        <div class="line">
+            <h2>Max Mustermann</h2>
+            <p>Name</p>
+        </div>
+        <div class="line">
+            <h2>017142371169</h2>
+            <p>Telefonnummer</p>
+        </div>
+        <div class="line">
+            <h2>02.02.2000</h2>
+            <p>Geburtsdatum</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
